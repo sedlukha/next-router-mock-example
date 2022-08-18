@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 const UseRouterPage = () => {
   const router = useRouter()
 
+  console.log(router);
+
   const handleClick = useCallback(() => router.push({
       pathname: router?.pathname,
       query: {
