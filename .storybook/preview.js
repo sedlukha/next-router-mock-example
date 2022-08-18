@@ -1,17 +1,10 @@
-import '../styles/globals.css'
-import '../styles/globals.scss'
+import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider/next-12';
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-  nextRouter: {
-    query: {
-      foo: 'this-is-a-global-override',
-    },
-  },
+  actions: { argTypesRegex: '^on[A-Z].*' }
 }
+
+export const decorators = [
+  (Story) => <MemoryRouterProvider><Story/></MemoryRouterProvider>
+];
+
