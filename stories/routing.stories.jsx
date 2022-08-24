@@ -1,6 +1,19 @@
-import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider/next-12'
 import RouterPage from '../pages/router'
+import LinkPage from '../pages/link'
 import UseRouterPage from '../pages/useRouter'
+import React, { useEffect } from 'react'
+import router from 'next-router-mock'
+
+const SingletonRouterProvider = ({
+ children,
+ url
+}) => {
+  useEffect(() => {
+    router.setCurrentUrl(url)
+  }, [url])
+
+  return <>{children}</>
+}
 
 export default {
   title: 'Pages',
@@ -8,19 +21,25 @@ export default {
 }
 
 export const UseRouter = () => (
-  <MemoryRouterProvider
+  <SingletonRouterProvider
     url="/useRouter"
-    async
   >
     <UseRouterPage />
-  </MemoryRouterProvider>
+  </SingletonRouterProvider>
 )
 
 export const Router = () => (
-  <MemoryRouterProvider
+  <SingletonRouterProvider
     url="/router"
-    async
   >
     <RouterPage />
-  </MemoryRouterProvider>
+  </SingletonRouterProvider>
+)
+
+export const Link = () => (
+  <SingletonRouterProvider
+    url="/link"
+  >
+    <LinkPage />
+  </SingletonRouterProvider>
 )
